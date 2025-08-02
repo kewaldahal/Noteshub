@@ -19,4 +19,9 @@ const upload = multer({ storage: storage });
 // upload route
 router.post('/upload', upload.single('file'), notesController.uploadNote);
 
+const verifyToken = require('../middleware/verifyToken');
+
+router.post('/upload', verifyToken, upload.single('file'), notesController.uploadNote);
+
+
 module.exports = router;
